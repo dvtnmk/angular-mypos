@@ -8,6 +8,9 @@ import { RegisterComponent } from './components/member/register/register.compone
 import { StockHomeComponent } from './components/stock/stock-home/stock-home.component';
 import { StockCreateComponent } from './components/stock/stock-create/stock-create.component';
 import { StockEditComponent } from './components/stock/stock-edit/stock-edit.component';
+import { HeaderComponent } from './components/shared/header/header.component';
+import { MenuComponent } from './components/shared/menu/menu.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,14 +19,20 @@ import { StockEditComponent } from './components/stock/stock-edit/stock-edit.com
     RegisterComponent,
     StockHomeComponent,
     StockCreateComponent,
-    StockEditComponent
+    StockEditComponent,
+    HeaderComponent,
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    
+    //DI
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

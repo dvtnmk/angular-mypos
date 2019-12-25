@@ -11,6 +11,8 @@ import { StockEditComponent } from './components/stock/stock-edit/stock-edit.com
 import { HeaderComponent } from './components/shared/header/header.component';
 import { MenuComponent } from './components/shared/menu/menu.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { ShopHomeComponent } from './components/shop/shop-home/shop-home.component';
+import { ShopPaymentComponent } from './components/shop/shop-payment/shop-payment.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     StockEditComponent,
     HeaderComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    ShopHomeComponent,
+    ShopPaymentComponent
   ],
   imports: [
     BrowserModule,

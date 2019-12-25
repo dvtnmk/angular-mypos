@@ -12,13 +12,13 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-header">MAIN NAVIGATION</li>
           <li class="nav-item">
-            <a class="nav-link">
+            <a [routerLink]="['/stock']" routerLinkActive="active"  class="nav-link">
               <i class="nav-icon fas fa-cubes"></i>
               <p>สต๊อก</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">
+            <a [routerLink]="['/shop']" routerLinkActive="active"  class="nav-link">
               <i class="nav-icon fas fa-shopping-basket"></i>
               <p>หน้าร้าน</p>
             </a>
@@ -47,7 +47,7 @@
               <p>กราฟ</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" (click)="logout()" >
             <a class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>ออกจากระบบ</p>

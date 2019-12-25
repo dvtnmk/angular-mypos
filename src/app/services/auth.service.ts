@@ -12,8 +12,8 @@ export class AuthService {
   isLogin() : boolean{
     return localStorage.getItem(this.keyAuth) !== null;
   }
-  login(){
-    localStorage.setItem(this.keyAuth,"token:12341234asddd");
+  login(auth : string){
+    localStorage.setItem(this.keyAuth,auth);
   }
   logout(){
     localStorage.clear()

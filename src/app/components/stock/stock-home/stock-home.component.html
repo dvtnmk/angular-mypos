@@ -60,16 +60,16 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let item of mProductArray">
-                      <td class="text-center">XXXX</td>
+                    <td class="text-center">{{item.productId}}</td>
                       <td>
-                        <img class="product_image border" />
-                        <strong class="product_name">{{ item }}</strong>
+                      <img  src="{{ item.image }}" class="product_image border" />
+                        <strong class="product_name">{{ item.name }}</strong>
                       </td>
-                      <td>฿XXX</td>
-                      <td>XXX PCS.</td>
+                      <td>฿{{item.price | number:'1.2-2'}}</td>
+                      <td>{{item.stock}} PCS.</td>
                       <td class="text-center">
-                        <img (click)="editProduct(111)" src="assets/images/ic_edit.png" class="edit_product">
-                        <img (click)="deleteProduct(111)" src="assets/images/ic_delete.png" class="delete_product">
+                        <img (click)="editProduct(item.productId)" src="assets/images/ic_edit.png" class="edit_product">
+                        <img (click)="deleteProduct(item.productId)" src="assets/images/ic_delete.png" class="delete_product">
                       </td>
                     </tr>
                   </tbody>

@@ -3,16 +3,18 @@ import { Subject } from 'rxjs';
 import { debounceTime } from "rxjs/operators";
 import { Router } from '@angular/router';
 import Swal from "sweetalert2";
+import { NetworkService } from 'src/app/services/network.service';
+import { Product } from 'src/app/models/product.model';
 @Component({
   selector: 'app-stock-home',
   templateUrl: './stock-home.component.html',
   styleUrls: ['./stock-home.component.css']
 })
 export class StockHomeComponent implements OnInit {
-  mProductArray: String[] = [];
+  mProductArray: Product[] = [];
 
   mSearchText = new Subject<string>();
-  constructor(private router : Router) { }
+  constructor(private router : Router, private networkService : NetworkService) { }
 
   ngOnInit() {
     this.mSearchText.pipe(
@@ -26,10 +28,27 @@ export class StockHomeComponent implements OnInit {
   }
 
   feedData(){
-    this.mProductArray = ['aa','bb','cc']
+    this.networkService.getProductAll().subscribe(
+      data=>{
+        const product = data.result as Product[];
+        this.mProductArray = product.map(item => {
+          item.image = this.networkService.getProductImage(item.image);
+          return item
+        });
+        // alert(JSON.stringify(data));
+      },
+      error=>{
+        alert(JSON.stringify(error));
+      }
+    )
   }
   checkOutOfStock(): number{
-    return 123;
+    return this.mProductArray.filter(
+      item => {
+        if(item.stock <= 0)
+          return item;
+      }
+    ).length;
   }
   searchProduct(word : string){
     console.log(word)
@@ -48,11 +67,20 @@ export class StockHomeComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
-        Swal.fire(
-          `Deleted!${id}`,
-          'Your file has been deleted.',
-          'success'
+        this.networkService.deleteProduct(id).subscribe(
+          data => {
+            Swal.fire(
+              `Deleted!${JSON.stringify(data)}`,
+              'Your file has been deleted.',
+              'success'
+            )
+            this.feedData();
+          },
+          error =>{
+            alert(error);
+          }
         )
+        
       }
     })
   }

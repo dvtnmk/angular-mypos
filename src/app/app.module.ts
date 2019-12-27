@@ -13,6 +13,9 @@ import { MenuComponent } from './components/shared/menu/menu.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ShopHomeComponent } from './components/shop/shop-home/shop-home.component';
 import { ShopPaymentComponent } from './components/shop/shop-payment/shop-payment.component';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from "@angular/common/http";
+import { NetworkInterceptor } from './services/network.interceptor';
+import { MainInterceptor } from './services/main.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,10 +34,13 @@ import { ShopPaymentComponent } from './components/shop/shop-payment/shop-paymen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
-    
+    { provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: MainInterceptor, multi: true },
+
     //DI
   ],
   bootstrap: [AppComponent]

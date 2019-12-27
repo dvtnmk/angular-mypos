@@ -1,3 +1,8 @@
+export interface ProductResponse{
+  result: Product | Product[];
+  message: string;
+}
+
 export class Product {
     productId: number;
     name: string;

@@ -9,7 +9,7 @@
             </ng-template>
             <ng-template #order>
               <ul class="card card_orders">
-                <li *ngFor="let item of mOrderArray;" class="order" class_bk="selected_row, normal_row">
+                <li *ngFor="let item of mOrderArray; let row = index" [ngClass]="[row % 2 === 0 ? 'selected_row' : 'normal_row','order']">
                   <div class="d-flex flex-row justify-content-between">
                     <div class="d-flex">
                       <div class="image_product_list_item">
@@ -18,7 +18,7 @@
                       <div class="d-flex flex-column order-detail-block">
                         <div class="title_product_list_item product-name">{{item.name}}</div>
                         <div class="pt-2 d-flex flex-row">
-                          <input class="form-control order_input-price" disabled value="฿{{ item.price * item.qty }}" />
+                          <input class="form-control order_input-price" disabled value="฿{{ item.price * item.qty | number:'1.2-2' }}" />
                           <div class="input-group ml-2 order_input-qty">
                             <div class="input-group-prepend" (click)="onClickAddOrder(item, true)">
                               <span class="input-group-text">
@@ -51,12 +51,12 @@
                 </div>
                 <div class="d-flex  justify-content-between align-items-center my-3">
                   <h5>Total</h5>
-                  <h3 class="total_price">฿{{ mTotalPrice }}</h3>
+                  <h3 class="total_price">฿{{ mTotalPrice | number : '1.2-2' }}</h3>
                 </div>
                 <ng-container *ngIf="mIsPaymentShow === false;then payment_btn else cancel_btn">here is ignored
                 </ng-container>
                 <ng-template #payment_btn>
-                  <button (click)="onClickPayment()" class="payment_btn btn btn-default" class_bk="payment_blank , payment_ready">
+                  <button (click)="onClickPayment()" [ngClass]="[mOrderArray.length === 0 ? 'payment_blank':'payment_ready' , 'payment_btn' ,'btn btn-default']" >
                     <strong>Payment</strong>
                   </button>
                 </ng-template>
